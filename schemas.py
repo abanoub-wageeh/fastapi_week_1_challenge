@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 from datetime import datetime
 
 
@@ -16,5 +16,22 @@ class NoteResponse(BaseModel):
     note_id : int
     title : str
     content : str
+    owner_id : int
     created_at : datetime
 
+
+class UserCreate(BaseModel):
+    email : EmailStr
+    password : str = Field(min_length=8)
+
+
+class UserUpdate(BaseModel):
+    email : EmailStr
+    password : str = Field(min_length=8)
+
+
+
+class UserResponse(BaseModel):
+    user_id: int
+    email: EmailStr
+    role: str
